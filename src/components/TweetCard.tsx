@@ -144,10 +144,10 @@ export const TweetCard = ({ user, content, timestamp, stats, image }: TweetCardP
               variant="ghost" 
               size="sm" 
               onClick={handleLike}
-              className={`flex items-center space-x-2 rounded-full px-2 py-1 h-8 ${
+              className={`flex items-center space-x-2 rounded-full px-2 py-1 h-8 hover:bg-twitter-red/10 ${
                 isLiked 
-                  ? "text-twitter-red bg-twitter-red/10" 
-                  : "text-twitter-gray hover:text-twitter-red hover:bg-twitter-red/10"
+                  ? "text-twitter-red" 
+                  : "text-twitter-gray hover:text-twitter-red"
               }`}
             >
               <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
