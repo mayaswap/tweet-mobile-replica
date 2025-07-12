@@ -61,7 +61,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'twitter-blue': 'hsl(var(--twitter-blue))',
+				'twitter-blue-hover': 'hsl(var(--twitter-blue-hover))',
+				'twitter-blue-light': 'hsl(var(--twitter-blue-light))',
+				'twitter-gray': 'hsl(var(--twitter-gray))',
+				'twitter-gray-light': 'hsl(var(--twitter-gray-light))',
+				'twitter-green': 'hsl(var(--twitter-green))',
+				'twitter-red': 'hsl(var(--twitter-red))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
