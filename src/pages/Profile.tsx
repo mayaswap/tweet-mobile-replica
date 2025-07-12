@@ -93,9 +93,6 @@ export default function Profile() {
             />
             
             <div className="flex space-x-2 mt-12">
-              <Button variant="outline" size="sm">
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
               <Button size="sm">Edit profile</Button>
             </div>
           </div>
