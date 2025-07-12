@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Repeat2, Heart, Share, MoreHorizontal } from "lucide-react";
@@ -67,22 +68,28 @@ export const TweetCard = ({ user, content, timestamp, stats, image }: TweetCardP
   return (
     <article className="border-b border-border px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
       <div className="flex space-x-3">
-        <Avatar className="w-10 h-10 flex-shrink-0">
-          <AvatarImage src={user.avatar} />
-          <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-        </Avatar>
+        <Link to="/profile" className="flex-shrink-0">
+          <Avatar className="w-10 h-10">
+            <AvatarImage src={user.avatar} />
+            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+          </Avatar>
+        </Link>
         
         <div className="flex-1 min-w-0">
           <div className="flex items-center space-x-2 mb-1">
-            <span className="font-bold text-foreground text-sm truncate">
-              {user.name}
-            </span>
+            <Link to="/profile" className="hover:underline">
+              <span className="font-bold text-foreground text-sm truncate">
+                {user.name}
+              </span>
+            </Link>
             {user.verified && (
               <svg className="w-4 h-4 fill-primary" viewBox="0 0 24 24">
                 <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-2.214-1.588c-.326-.234-.398-.691-.164-1.018.234-.326.691-.398 1.018-.164l1.41 1.01 3.247-4.87c.235-.352.704-.444 1.056-.207.35.235.44.703.206 1.055z"/>
               </svg>
             )}
-            <span className="text-twitter-gray text-sm">@{user.username}</span>
+            <Link to="/profile" className="hover:underline">
+              <span className="text-twitter-gray text-sm">@{user.username}</span>
+            </Link>
             <span className="text-twitter-gray text-sm">·</span>
             <span className="text-twitter-gray text-sm">{timestamp}</span>
             
