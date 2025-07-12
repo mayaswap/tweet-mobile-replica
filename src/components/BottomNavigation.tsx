@@ -15,7 +15,7 @@ export const BottomNavigation = () => {
   const location = useLocation();
 
   return (
-    <nav className="border-t border-border bg-background">
+    <nav className="fixed bottom-0 left-0 right-0 border-t border-border bg-background/95 backdrop-blur-lg z-50 max-w-md mx-auto">
       <div className="flex justify-around items-center h-16 px-2">
         {navItems.map((item) => {
           const IconComponent = item.icon;
