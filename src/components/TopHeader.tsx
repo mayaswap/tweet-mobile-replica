@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { PhantomConnectButton } from './PhantomConnectButton';
 
 export const TopHeader = () => {
   const location = useLocation();
@@ -36,7 +36,7 @@ export const TopHeader = () => {
               </AvatarFallback>
             </Avatar>
           ) : (
-            <WalletMultiButton className="!bg-primary !text-primary-foreground hover:!bg-primary/90 !rounded-md !font-medium !transition-colors !h-8 !text-sm" />
+            <PhantomConnectButton />
           )}
           
           <div className="flex-1 flex justify-center">
