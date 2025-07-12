@@ -66,7 +66,8 @@ export const TweetCard = ({ user, content, timestamp, stats, image }: TweetCardP
     });
   };
   return (
-    <article className="border-b border-border px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <Link to={`/tweet/1`}>
+      <article className="border-b border-border px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
       <div className="flex space-x-3">
         <Link to="/profile" className="flex-shrink-0">
           <Avatar className="w-10 h-10">
@@ -162,8 +163,9 @@ export const TweetCard = ({ user, content, timestamp, stats, image }: TweetCardP
               <Share className="w-4 h-4" />
             </Button>
           </div>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 };
