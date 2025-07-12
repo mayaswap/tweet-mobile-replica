@@ -291,22 +291,7 @@ export default function TweetDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="sticky top-0 bg-background/80 backdrop-blur-lg border-b border-border z-50">
-        <div className="flex items-center px-4 h-14">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => navigate(-1)}
-            className="mr-4"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <h1 className="text-xl font-bold">Tweet</h1>
-        </div>
-      </div>
-
+    <div>
       {/* Main Tweet */}
       <div className="border-b border-border px-4 py-4">
         <div className="flex space-x-3 mb-4">

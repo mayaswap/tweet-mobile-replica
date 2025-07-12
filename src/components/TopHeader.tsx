@@ -1,12 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { LogOut, ArrowLeft } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PhantomConnectButton } from './PhantomConnectButton';
 
 export const TopHeader = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { connected, disconnect, publicKey } = useWallet();
 
   const getPageTitle = () => {
@@ -19,7 +20,12 @@ export const TopHeader = () => {
         return "Notifications";
       case "/profile":
         return "Profile";
+      case "/profile/edit":
+        return "Edit Profile";
       default:
+        if (location.pathname.startsWith("/tweet/")) {
+          return "Tweet";
+        }
         return "Twitter";
     }
   };
@@ -55,6 +61,25 @@ export const TopHeader = () => {
           ) : (
             <div className="w-8" />
           )}
+        </div>
+      </header>
+    );
+  }
+
+  // For tweet detail pages, show back button
+  if (location.pathname.startsWith("/tweet/")) {
+    return (
+      <header className="sticky top-0 bg-background/80 backdrop-blur-lg border-b border-border z-50">
+        <div className="flex items-center px-4 h-14">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate(-1)}
+            className="mr-4"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <h1 className="text-xl font-bold">{getPageTitle()}</h1>
         </div>
       </header>
     );
