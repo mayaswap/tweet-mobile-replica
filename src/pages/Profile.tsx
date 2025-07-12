@@ -93,7 +93,7 @@ export default function Profile() {
             />
             
             <div className="flex space-x-2 mt-12">
-              <Button size="sm">Edit profile</Button>
+              <Button variant="ghost" size="sm">Edit profile</Button>
             </div>
           </div>
           
