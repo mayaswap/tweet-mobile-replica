@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Repeat2, Heart, Share, MoreHorizontal } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface TweetCardProps {
   user: {
@@ -20,6 +22,48 @@ interface TweetCardProps {
 }
 
 export const TweetCard = ({ user, content, timestamp, stats, image }: TweetCardProps) => {
+  const [tweetStats, setTweetStats] = useState(stats);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isRetweeted, setIsRetweeted] = useState(false);
+  const { toast } = useToast();
+
+  const handleReply = () => {
+    setTweetStats(prev => ({ ...prev, replies: prev.replies + 1 }));
+    toast({
+      title: "Reply posted!",
+      description: "Your reply has been posted successfully.",
+    });
+  };
+
+  const handleRetweet = () => {
+    const newRetweetState = !isRetweeted;
+    setIsRetweeted(newRetweetState);
+    setTweetStats(prev => ({ 
+      ...prev, 
+      retweets: newRetweetState ? prev.retweets + 1 : prev.retweets - 1 
+    }));
+    toast({
+      title: newRetweetState ? "Retweeted!" : "Retweet removed",
+      description: newRetweetState ? "Tweet has been retweeted." : "Retweet has been removed.",
+    });
+  };
+
+  const handleLike = () => {
+    const newLikeState = !isLiked;
+    setIsLiked(newLikeState);
+    setTweetStats(prev => ({ 
+      ...prev, 
+      likes: newLikeState ? prev.likes + 1 : prev.likes - 1 
+    }));
+  };
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast({
+      title: "Link copied!",
+      description: "Tweet link has been copied to clipboard.",
+    });
+  };
   return (
     <article className="border-b border-border px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
       <div className="flex space-x-3">
@@ -67,33 +111,45 @@ export const TweetCard = ({ user, content, timestamp, stats, image }: TweetCardP
             <Button 
               variant="ghost" 
               size="sm" 
+              onClick={handleReply}
               className="flex items-center space-x-2 text-twitter-gray hover:text-primary hover:bg-primary/10 rounded-full px-2 py-1 h-8"
             >
               <MessageCircle className="w-4 h-4" />
-              <span className="text-xs">{stats.replies}</span>
+              <span className="text-xs">{tweetStats.replies}</span>
             </Button>
             
             <Button 
               variant="ghost" 
               size="sm" 
-              className="flex items-center space-x-2 text-twitter-gray hover:text-twitter-green hover:bg-twitter-green/10 rounded-full px-2 py-1 h-8"
+              onClick={handleRetweet}
+              className={`flex items-center space-x-2 rounded-full px-2 py-1 h-8 ${
+                isRetweeted 
+                  ? "text-twitter-green bg-twitter-green/10" 
+                  : "text-twitter-gray hover:text-twitter-green hover:bg-twitter-green/10"
+              }`}
             >
               <Repeat2 className="w-4 h-4" />
-              <span className="text-xs">{stats.retweets}</span>
+              <span className="text-xs">{tweetStats.retweets}</span>
             </Button>
             
             <Button 
               variant="ghost" 
               size="sm" 
-              className="flex items-center space-x-2 text-twitter-gray hover:text-twitter-red hover:bg-twitter-red/10 rounded-full px-2 py-1 h-8"
+              onClick={handleLike}
+              className={`flex items-center space-x-2 rounded-full px-2 py-1 h-8 ${
+                isLiked 
+                  ? "text-twitter-red bg-twitter-red/10" 
+                  : "text-twitter-gray hover:text-twitter-red hover:bg-twitter-red/10"
+              }`}
             >
-              <Heart className="w-4 h-4" />
-              <span className="text-xs">{stats.likes}</span>
+              <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
+              <span className="text-xs">{tweetStats.likes}</span>
             </Button>
             
             <Button 
               variant="ghost" 
               size="sm" 
+              onClick={handleShare}
               className="flex items-center space-x-2 text-twitter-gray hover:text-primary hover:bg-primary/10 rounded-full px-2 py-1 h-8"
             >
               <Share className="w-4 h-4" />
