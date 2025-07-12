@@ -130,10 +130,10 @@ export const TweetCard = ({ user, content, timestamp, stats, image }: TweetCardP
               variant="ghost" 
               size="sm" 
               onClick={handleRetweet}
-              className={`flex items-center space-x-2 rounded-full px-2 py-1 h-8 ${
+              className={`flex items-center space-x-2 rounded-full px-2 py-1 h-8 hover:bg-twitter-green/10 ${
                 isRetweeted 
-                  ? "text-twitter-green bg-twitter-green/10" 
-                  : "text-twitter-gray hover:text-twitter-green hover:bg-twitter-green/10"
+                  ? "text-twitter-green" 
+                  : "text-twitter-gray hover:text-twitter-green"
               }`}
             >
               <Repeat2 className="w-4 h-4" />
