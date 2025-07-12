@@ -8,8 +8,10 @@ import Index from "./pages/Index";
 import Search from "./pages/Search";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import { TwitterLayout } from "./components/TwitterLayout";
+import { WalletContextProvider } from "./contexts/WalletContext";
 
 const queryClient = new QueryClient();
 
@@ -24,17 +26,24 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <TwitterLayout>
+        <WalletContextProvider>
+          <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/notifications" element={<Notifications />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/*" element={
+                <TwitterLayout>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/search" element={<Search />} />
+                    <Route path="/notifications" element={<Notifications />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </TwitterLayout>
+              } />
             </Routes>
-          </TwitterLayout>
-        </BrowserRouter>
+          </BrowserRouter>
+        </WalletContextProvider>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>

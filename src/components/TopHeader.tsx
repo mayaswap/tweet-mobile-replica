@@ -1,8 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { LogOut } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export const TopHeader = () => {
   const location = useLocation();
+  const { connected, disconnect, publicKey } = useWallet();
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -24,10 +29,15 @@ export const TopHeader = () => {
     return (
       <header className="sticky top-0 bg-background/80 backdrop-blur-lg border-b border-border z-50">
         <div className="flex items-center justify-between px-4 h-14">
-          <Avatar className="w-8 h-8">
-            <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" />
-            <AvatarFallback>JD</AvatarFallback>
-          </Avatar>
+          {connected ? (
+            <Avatar className="w-8 h-8">
+              <AvatarFallback>
+                {publicKey?.toString().slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          ) : (
+            <WalletMultiButton className="!bg-primary !text-primary-foreground hover:!bg-primary/90 !rounded-md !font-medium !transition-colors !h-8 !text-sm" />
+          )}
           
           <div className="flex-1 flex justify-center">
             <svg
@@ -38,7 +48,13 @@ export const TopHeader = () => {
             </svg>
           </div>
           
-          <div className="w-8" />
+          {connected ? (
+            <Button variant="ghost" size="icon" onClick={disconnect} className="w-8 h-8">
+              <LogOut className="h-4 w-4" />
+            </Button>
+          ) : (
+            <div className="w-8" />
+          )}
         </div>
       </header>
     );
