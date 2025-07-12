@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Search from "./pages/Search";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import { TwitterLayout } from "./components/TwitterLayout";
@@ -37,6 +38,7 @@ const App = () => (
                     <Route path="/search" element={<Search />} />
                     <Route path="/notifications" element={<Notifications />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile/edit" element={<EditProfile />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </TwitterLayout>

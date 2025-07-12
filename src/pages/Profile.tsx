@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Calendar, MapPin, Link as LinkIcon, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TweetCard } from "@/components/TweetCard";
@@ -64,6 +65,7 @@ const userTweets = [
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("tweets");
+  const navigate = useNavigate();
 
   const tabs = [
     { id: "tweets", label: "Tweets", count: userTweets.length },
@@ -93,7 +95,7 @@ export default function Profile() {
             />
             
             <div className="flex space-x-2 mt-12">
-              <Button variant="ghost" size="sm">Edit profile</Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate("/profile/edit")}>Edit profile</Button>
             </div>
           </div>
           
