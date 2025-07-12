@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Calendar, MapPin, Link as LinkIcon, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TweetCard } from "@/components/TweetCard";
@@ -66,6 +66,10 @@ const userTweets = [
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("tweets");
   const navigate = useNavigate();
+  const { username } = useParams();
+  
+  // Check if this is the current user's profile (no username param or matches current user)
+  const isOwnProfile = !username || username === "johndoe";
 
   const tabs = [
     { id: "tweets", label: "Tweets", count: userTweets.length },
@@ -95,7 +99,11 @@ export default function Profile() {
             />
             
             <div className="flex space-x-2 mt-12">
-              <Button variant="ghost" size="sm" onClick={() => navigate("/profile/edit")}>Edit profile</Button>
+              {isOwnProfile ? (
+                <Button variant="ghost" size="sm" onClick={() => navigate("/profile/edit")}>Edit profile</Button>
+              ) : (
+                <Button variant="outline" size="sm">Follow</Button>
+              )}
             </div>
           </div>
           
